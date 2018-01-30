@@ -18,7 +18,7 @@ let p5js = function (p) {
     
     // Bind step function to button clicks
     let button = document.getElementById('stepLinear');
-    let stepCountField = document.getElementById('stepCountLinearField');
+    let stepCountField = document.getElementById('stepCountLinear');
     button.onclick = function () {
         search.step();
         stepCountField.innerHTML = "Number of steps: " + search.numSteps;
@@ -38,7 +38,7 @@ let p5js = function (p) {
     }
 
     p.draw = function () {
-        p.background(256);
+        p.background(250, 235, 215);
         search.show();
     }
 } 
