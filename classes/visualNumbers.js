@@ -58,10 +58,10 @@ function VisualArray(sketch, x, y) {
     }
 
     this.getPositionOfIndex = function (index) {
-        if (index > numbers.length)
+        if (index > this.numbers.length)
             return null;
         
-        return new Point(numbers[index].x, numbers[index].y);
+        return new Point(this.numbers[index].x, this.numbers[index].y);
     }
 
     this.changeColorOfIndex = function (index, color) {
@@ -73,20 +73,31 @@ function VisualArray(sketch, x, y) {
 // The class for visualizing a linear search through an array
 function visualLinearSearch(sketch, numbers, x = 50, y = 50) {
     this.p = sketch;
+    this.currentIndex = 0;
+    
     this.arr = new VisualArray(sketch, x, y);
-    this.searchHead = new SearchHead(sketch, x, y);
-
     numbers.forEach(num => {
         this.arr.add(num);
     });
 
+    this.searchHead = new SearchHead(sketch, 
+                                this.arr.getPositionOfIndex(0).x, 
+                                this.arr.getPositionOfIndex(0).y);
+
     this.show = function () {
         this.arr.show();
         this.searchHead.show();
+        this.searchHead.update();
     }
 
-    this.searchFor = function (num) {
+    this.startSearchFor = function (num) {
         this.searchHead.setTarget(num);
+    }
+
+    this.step = function () {
+        this.currentIndex++;
+        let next = this.arr.getPositionOfIndex(this.currentIndex);
+        this.searchHead.moveTo(next);
     }
 }
 
@@ -97,6 +108,10 @@ function SearchHead (sketch, x, y) {
     this.targetPos = new Point(x, y - 15);
     this.endPos = new Point(x, y - SEARCH_HEAD_LENGTH);
     this.searchTarget = null;
+
+    this.nextPos = null;
+    this.moving = false;
+    this.speedRate = 0.12;
 
     // Formatting info
     this.textXOffset = this.val >= 10 ? FONT_SIZE * 0.7 : FONT_SIZE * 0.3;
@@ -118,8 +133,26 @@ function SearchHead (sketch, x, y) {
         }
     }
 
+    this.update = function() {
+        if (this.moving) {
+            let movement = ( this.nextPos.x - this.targetPos.x ) * this.speedRate;
+            this.targetPos.x += movement;
+            this.endPos.x += movement;
+            if ( (this.nextPos.x - this.targetPos.x) < 1 ) {
+                this.targetPos.x = this.nextPos.x;
+                this.endPos.x = this.nextPos.x;
+                this.moving = false;
+            }
+        }
+    }
+
     this.setTarget = function (num) {
         this.searchTarget = num;
+    }
+
+    this.moveTo = function (pos) {
+        this.moving = true;
+        this.nextPos = pos;
     }
 }
 
