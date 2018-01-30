@@ -25,15 +25,14 @@ function VisualNumber (sketch, val, x, y) {
 
     this.changeColor = function (color) {
         if (color == 'red') {
-
+            this.color = new Color(256, 200, 200);
         } else if (color == 'green') {
-
+            this.color = new Color(200, 256, 200);
         } else if (color == 'yellow') {
-
+            this.color = new Color(256, 256, 200);
         }
     }
 }
-
 
 // The class for visualizing an array of numbers
 function VisualArray(sketch, x, y) {
@@ -63,6 +62,11 @@ function VisualArray(sketch, x, y) {
             return null;
         
         return new Point(numbers[index].x, numbers[index].y);
+    }
+
+    this.changeColorOfIndex = function (index, color) {
+        let num = this.numbers[index];
+        num.changeColor(color);
     }
 }
 
