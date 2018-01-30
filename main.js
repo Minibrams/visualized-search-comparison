@@ -7,7 +7,7 @@ let p5js = function (p) {
     
     // Generate array of numbers
     let numArray = [];
-    for (let i = 0; i < 60; i++) {
+    for (let i = 0; i < 30; i++) {
         numArray.push(p.floor(p.random(0, 100)));
     }
 
@@ -18,7 +18,7 @@ let p5js = function (p) {
     
     // Bind step function to button clicks
     let button = document.getElementById('stepLinear');
-    let stepCountField = document.getElementById('stepCountField');
+    let stepCountField = document.getElementById('stepCountLinearField');
     button.onclick = function () {
         search.step();
         stepCountField.innerHTML = "Number of steps: " + search.numSteps;

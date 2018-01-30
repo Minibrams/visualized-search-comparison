@@ -1,0 +1,30 @@
+h1 {
+    text-align: center;
+}
+
+h6 {
+    text-align: center;
+}
+
+.mainContent {
+    justify-content: center;
+    text-align: center;
+}
+
+.btn {
+    display: block;
+    margin: 0 auto;
+}
+
+.mainContent {
+    display: block;
+    text-align: center;
+}
+
+.left {
+    background-color: antiquewhite;
+}
+
+.right {
+    background-color: bisque;
+}

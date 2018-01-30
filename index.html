@@ -5,22 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <title>Sorting algorithms visualized</title>
 </head>
 <body>
     <section class = "container">
         <h1>Search Visualizer!</h1>
-        <button id="stepLinear">Step</button>
-        <div id="stepCountField">Number of steps: 1</div>
+        
     </section>
 
-    <div class="container">
-        <div class="row">
-          <div class="col" id = "theCanvas">
+    <div>
+        <div class = "row">
+          <div class="col-lg-6 col-sm-12 left" id = "theCanvas">
             <h1>Linear Search</h1>
+            <button class="btn btn-info" id="stepLinear">Step</button>
+            <div class = "infoField" id = "stepCountLinear">
+                <h6>Number of steps: 1</h4>
+            </div>
           </div>
-          <div class="col">
+          <div class="col-lg-6 col-sm-12 right">
             <h1>Binary Search</h1>
+            <button class="btn btn-info" id="stepBinary">Step</button>
+            <div class = "infoField" id = "stepCountBinary">
+                <h6>Number of steps: 1</h4>
+            </div>
           </div>
         </div>
       </div>
