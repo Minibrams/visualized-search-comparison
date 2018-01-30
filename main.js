@@ -14,6 +14,12 @@ let p5js = function (p) {
         p.createCanvas(this.width, this.height);
 
         
+        let arr = new visualArray(p, 50, 50);
+        for (let i = 0; i < 10; i++) {
+            arr.add(i);
+        }
+
+        arr.show();
     }
 
     p.draw = function () {
