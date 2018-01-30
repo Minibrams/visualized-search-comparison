@@ -10,11 +10,27 @@ function VisualNumber (sketch, val, x, y) {
     // Formatting info
     this.textXOffset = this.val >= 10 ? FONT_SIZE * 0.7 : FONT_SIZE * 0.3;
     this.textYOffset = FONT_SIZE * 0.4;
+    this.color = new Color(256, 256, 256);
 
     // Methods
     this.show = function () {
+        //Draw background
+        this.p.fill(this.color.r, this.color.g, this.color.b);
         this.p.ellipse(this.x, this.y, 20, 20);
+        
+        //Draw text
+        this.p.fill(0);
         this.p.text(this.val, this.x - this.textXOffset, this.y + this.textYOffset);    
+    }
+
+    this.changeColor = function (color) {
+        if (color == 'red') {
+
+        } else if (color == 'green') {
+
+        } else if (color == 'yellow') {
+
+        }
     }
 }
 
@@ -54,4 +70,10 @@ function VisualArray(sketch, x, y) {
 function Point (x, y) {
     this.x = x;
     this.y = y;
+}
+
+function Color (r, g, b) {
+    this.r = r;
+    this.g = g;
+    this.b = b;
 }
