@@ -104,6 +104,9 @@ function visualLinearSearch(sketch, numbers, x = 50, y = 50) {
         if (this.arr.getNumberAtIndex(this.currentIndex) == this.searchHead.searchTarget) {
             this.arr.changeColorOfIndex(this.currentIndex, 'green');
             return;
+        } else if (this.currentIndex == this.arr.numbers.length-1) {
+            this.arr.changeColorOfIndex(this.currentIndex, 'red');
+            return;
         } else {
             this.arr.changeColorOfIndex(this.currentIndex, 'red');
             this.currentIndex++;

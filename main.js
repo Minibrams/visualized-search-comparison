@@ -5,10 +5,16 @@ const SEARCH_HEAD_WIDTH = 10;
 
 let p5js = function (p) {
     
+    // Establish visualization for a linear search
     let search = new visualLinearSearch(p, [1, 2, 45, 3, 2]);
-        search.startSearchFor(4);
-        search.step();
+    search.startSearchFor(4);
     
+    // Bind step function to button clicks
+    let button = document.getElementById('stepLinear');
+    button.onclick = function () {
+        search.step();
+    }
+
     p.setup = function() {
         // Save height and width for later positioning
         let cnv = document.getElementById('theCanvas');
