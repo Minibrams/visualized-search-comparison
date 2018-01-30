@@ -84,6 +84,22 @@ function visualLinearSearch(sketch, numbers, x = 50, y = 50) {
     }
 }
 
+// The class for visualizing the searching head
+function SearchHead (sketch, x, y) {
+    this.p = sketch;
+    this.targetPos = new Point(x, y);
+    this.endPos = new Point(x, y - SEARCH_HEAD_SIZE);
+
+    this.show = function () {
+        fill(0);
+        // Draw the horizontal line
+        p.line(this.targetPos.x, this.targetPos.y, this.endPos.x, this.endPos.y);
+
+        // Draw the upper bar
+        p.line(this.endPos.x - SEARCH_HEAD_WIDTH * 0.5, this.endPos.y, 
+               this.endPos.x + SEARCH_HEAD_WIDTH * 0.5, this.endPos.y);
+    } 
+}
 
 // The class for containing coordinates
 function Point (x, y) {
@@ -91,6 +107,7 @@ function Point (x, y) {
     this.y = y;
 }
 
+// The class for containing RGB colors
 function Color (r, g, b) {
     this.r = r;
     this.g = g;
