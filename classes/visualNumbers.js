@@ -79,6 +79,9 @@ function visualLinearSearch(sketch, numbers, x = 50, y = 50) {
         this.arr.add(num);
     });
 
+    this.show = function () {
+        this.arr.show();
+    }
 }
 
 
