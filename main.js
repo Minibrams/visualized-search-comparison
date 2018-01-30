@@ -1,7 +1,13 @@
 // Constants
 const FONT_SIZE = 10;
+const SEARCH_HEAD_LENGTH = 25;
+const SEARCH_HEAD_WIDTH = 10;
 
 let p5js = function (p) {
+    
+    let search = new visualLinearSearch(p, [1, 2, 45, 3, 2]);
+        search.startSearchFor(4);
+        search.step();
     
     p.setup = function() {
         // Save height and width for later positioning
@@ -13,12 +19,12 @@ let p5js = function (p) {
         p.textSize(FONT_SIZE);
         p.createCanvas(this.width, this.height);
 
-        let search = new visualLinearSearch(p, [1, 2, 45, 3, 2]);
-        search.show();
+        
     }
 
     p.draw = function () {
-        
+        p.background(256);
+        search.show();
     }
 } 
 
