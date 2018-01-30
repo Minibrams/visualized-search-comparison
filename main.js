@@ -1,8 +1,6 @@
 // Constants
 const FONT_SIZE = 10;
 
-let numbers = [];
-
 var p5js = function (p) {
     
     p.setup = function() {
@@ -11,8 +9,12 @@ var p5js = function (p) {
         this.width = cnv.offsetWidth;
         this.height = cnv.offsetHeight;
         
+        //Configure p5
         p.textSize(FONT_SIZE);
         p.createCanvas(this.width, this.height);
+
+        let num = new visualNumber(p, 12, this.width * 0.5, this.height * 0.5);
+        num.show();
     }
 
     p.draw = function () {
