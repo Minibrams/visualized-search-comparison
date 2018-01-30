@@ -1,6 +1,6 @@
 
 // The class for visualizing single numbers
-function visualNumber (sketch, val, x, y) {
+function VisualNumber (sketch, val, x, y) {
     // Essential info
     this.p = sketch;
     this.val = val;
@@ -20,7 +20,7 @@ function visualNumber (sketch, val, x, y) {
 
 
 // The class for visualizing an array of numbers
-function visualArray(sketch, x, y) {
+function VisualArray(sketch, x, y) {
     // Essential info
     this.p = sketch;
     this.numbers = [];
@@ -32,7 +32,7 @@ function visualArray(sketch, x, y) {
     // Methods
     this.add = function(num) {
         let xOffset = this.numbers.length * this.numOffset;
-        let newNum = new visualNumber(this.p, num, x + xOffset, y);
+        let newNum = new VisualNumber(this.p, num, x + xOffset, y);
         this.numbers.push(newNum);
     }
 
@@ -41,5 +41,10 @@ function visualArray(sketch, x, y) {
             element.show();
         });
     }
+
+    this.getPositionOfIndex = function (index) {
+
+    }
 }
 
+// The class for containing coordinates
