@@ -57,6 +57,10 @@ function VisualArray(sketch, x, y) {
         });
     }
 
+    this.getNumberAtIndex = function (index) {
+        return this.numbers[index].val;
+    }
+
     this.getPositionOfIndex = function (index) {
         if (index > this.numbers.length)
             return null;
@@ -92,12 +96,22 @@ function visualLinearSearch(sketch, numbers, x = 50, y = 50) {
 
     this.startSearchFor = function (num) {
         this.searchHead.setTarget(num);
+        this.arr.changeColorOfIndex(this.currentIndex, 'yellow');
     }
 
     this.step = function () {
-        this.currentIndex++;
-        let next = this.arr.getPositionOfIndex(this.currentIndex);
-        this.searchHead.moveTo(next);
+        
+        if (this.arr.getNumberAtIndex(this.currentIndex) == this.searchHead.searchTarget) {
+            this.arr.changeColorOfIndex(this.currentIndex, 'green');
+            return;
+        } else {
+            this.arr.changeColorOfIndex(this.currentIndex, 'red');
+            this.currentIndex++;
+            this.arr.changeColorOfIndex(this.currentIndex, 'yellow');
+            let next = this.arr.getPositionOfIndex(this.currentIndex);
+            this.searchHead.moveTo(next);
+        }
+        
     }
 }
 
