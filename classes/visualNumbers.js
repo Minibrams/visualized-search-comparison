@@ -70,6 +70,18 @@ function VisualArray(sketch, x, y) {
     }
 }
 
+// The class for visualizing a linear search through an array
+function visualLinearSearch(sketch, numbers, x = 50, y = 50) {
+    this.p = sketch;
+    this.arr = new VisualArray(sketch, x, y);
+
+    numbers.forEach(num => {
+        this.arr.add(num);
+    });
+
+}
+
+
 // The class for containing coordinates
 function Point (x, y) {
     this.x = x;
