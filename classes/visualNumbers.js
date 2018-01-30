@@ -78,6 +78,7 @@ function VisualArray(sketch, x, y) {
 function visualLinearSearch(sketch, numbers, x = 50, y = 50) {
     this.p = sketch;
     this.currentIndex = 0;
+    this.numSteps = 1;
     
     this.arr = new VisualArray(sketch, x, y);
     numbers.forEach(num => {
@@ -113,6 +114,7 @@ function visualLinearSearch(sketch, numbers, x = 50, y = 50) {
             this.arr.changeColorOfIndex(this.currentIndex, 'yellow');
             let next = this.arr.getPositionOfIndex(this.currentIndex);
             this.searchHead.moveTo(next);
+            this.numSteps++;
         }
         
     }

@@ -6,13 +6,15 @@ const SEARCH_HEAD_WIDTH = 10;
 let p5js = function (p) {
     
     // Establish visualization for a linear search
-    let search = new visualLinearSearch(p, [1, 2, 45, 3, 2]);
+    let search = new visualLinearSearch(p, [1, 2, 45, 3, 2, 8, 99, 4, 21, 12]);
     search.startSearchFor(4);
     
     // Bind step function to button clicks
     let button = document.getElementById('stepLinear');
+    let stepCountField = document.getElementById('stepCountField');
     button.onclick = function () {
         search.step();
+        stepCountField.innerHTML = "Number of steps: " + search.numSteps;
     }
 
     p.setup = function() {
