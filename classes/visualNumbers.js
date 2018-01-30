@@ -43,8 +43,15 @@ function VisualArray(sketch, x, y) {
     }
 
     this.getPositionOfIndex = function (index) {
-
+        if (index > numbers.length)
+            return null;
+        
+        return new Point(numbers[index].x, numbers[index].y);
     }
 }
 
 // The class for containing coordinates
+function Point (x, y) {
+    this.x = x;
+    this.y = y;
+}
