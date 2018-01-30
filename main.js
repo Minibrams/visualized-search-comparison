@@ -1,16 +1,22 @@
+// Constants
+const FONT_SIZE = 10;
+
+let numbers = [];
+
 var p5js = function (p) {
     
     p.setup = function() {
         // Save height and width for later positioning
         let cnv = document.getElementById('theCanvas');
-        p.width = cnv.offsetWidth;
-        p.height = cnv.offsetHeight;
-        p.createCanvas(p.width, p.height);
-        p.background(0);
+        this.width = cnv.offsetWidth;
+        this.height = cnv.offsetHeight;
+        
+        p.textSize(FONT_SIZE);
+        p.createCanvas(this.width, this.height);
     }
 
     p.draw = function () {
-        p.background(0);
+    
     }
 } 
 
