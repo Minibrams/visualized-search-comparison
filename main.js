@@ -13,13 +13,8 @@ let p5js = function (p) {
         p.textSize(FONT_SIZE);
         p.createCanvas(this.width, this.height);
 
-        
-        let arr = new visualArray(p, 50, 50);
-        for (let i = 0; i < 10; i++) {
-            arr.add(i);
-        }
-
-        arr.show();
+        let search = new visualLinearSearch(p, [1, 2, 45, 3, 2]);
+        search.show();
     }
 
     p.draw = function () {
