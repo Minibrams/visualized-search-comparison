@@ -14,4 +14,5 @@ var p5js = function (p) {
     }
 } 
 
+// This step is crucial for the p5 sketch to be displayed.
 var theP5Sketch = new p5(p5js, 'theCanvas');
