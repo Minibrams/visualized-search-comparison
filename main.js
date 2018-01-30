@@ -65,6 +65,7 @@ let binarySearch = function (p) {
 
         let spacing = (numArray.length * 15) / 2;
         let binaryTree = new VisualBinaryTree(p, numArray, this.width * 0.5, 20, spacing);
+        binaryTree.left.left.left.changeColorRecursively('red');
         binaryTree.show();
     }
 }

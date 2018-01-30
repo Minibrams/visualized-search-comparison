@@ -133,7 +133,7 @@ function SearchHead (sketch, x, y) {
     this.speedRate = 0.12;
 
     // Formatting info
-    this.textXOffset = this.val >= 10 ? FONT_SIZE * 0.7 : FONT_SIZE * 0.3;
+    this.textXOffset = 0;
     this.textYOffset = FONT_SIZE * 0.4;
 
     // Methods
@@ -167,6 +167,7 @@ function SearchHead (sketch, x, y) {
 
     this.setTarget = function (num) {
         this.searchTarget = num;
+        this.textXOffset = num >= 10 ? FONT_SIZE * 0.7 : FONT_SIZE * 0.3;
     }
 
     this.moveTo = function (pos) {

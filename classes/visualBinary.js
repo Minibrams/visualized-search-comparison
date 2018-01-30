@@ -3,6 +3,10 @@ function VisualBinaryTree (sketch, numbers, x, y, xSpacing) {
     this._numbers = numbers;
     this.left = null;
     this.right = null;
+    this.x = x;
+    this.y = y;
+
+    this.color = new Color(256, 256, 256);
 
     //Immediately build the tree to visualize it
     if (this._numbers.length == 1) {
@@ -20,7 +24,28 @@ function VisualBinaryTree (sketch, numbers, x, y, xSpacing) {
 
     this.show = function () {
         this.visualRoot.show();
-        if (this.left != null) this.left.show();
-        if (this.right != null) this.right.show();
+        if (this.left != null) {
+            this.p.line(this.x, this.y + 10, this.left.x, this.left.y);
+            this.left.show();
+        }
+        if (this.right != null) {
+            this.p.line(this.x, this.y + 10, this.right.x, this.right.y);
+            this.right.show();
+        }
+    }
+
+    this.changeColor = function(color) {
+        this.visualRoot.changeColor(color);
+    }
+
+    this.changeColorRecursively = function (color) {
+        this.changeColor(color);
+        if (this.left != null) {
+            this.left.changeColorRecursively(color);
+        }
+    
+        if (this.right != null) {
+            this.right.changeColorRecursively(color);
+        }
     }
 }
