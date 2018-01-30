@@ -4,15 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <title>Sorting algorithms visualized</title>
 </head>
 <body>
-    <h1>Visualized below</h1>
-    <button id="stepLinear">Step</button>
-    <div id="stepCountField">Number of steps: 1</div>
-    <div id="theCanvas" style="width: 500; height: 500;">
+    <section class = "container">
+        <h1>Search Visualizer!</h1>
+        <button id="stepLinear">Step</button>
+        <div id="stepCountField">Number of steps: 1</div>
+    </section>
 
-    </div>
+    <div class="container">
+        <div class="row">
+          <div class="col" id = "theCanvas">
+            <h1>Linear Search</h1>
+          </div>
+          <div class="col">
+            <h1>Binary Search</h1>
+          </div>
+        </div>
+      </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js"></script>
