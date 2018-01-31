@@ -45,6 +45,7 @@ let linearSearch = function (p) {
 
 
 let binarySearch = function (p) {
+    let binary = null;
 
     p.setup = function () {
         // Save height and width for later positioning
@@ -62,11 +63,20 @@ let binarySearch = function (p) {
         }
 
         numArray.sort();
+        binary = new VisualBinarySearch(p, numArray, this.width * 0.5, 50);
+        // Bind button to step function
+        let button = document.getElementById('stepBinary');
+        let numStepsField = document.getElementById('stepCountBinary');
+        button.onclick = function () {
+            binary.step();
+            numStepsField.innerHTML = 'Number of steps: ' + binary.numSteps;
+        }
+        binary.startSearchFor(60);
+    }
 
-        let spacing = (numArray.length * 15) / 2;
-        let binaryTree = new VisualBinaryTree(p, numArray, this.width * 0.5, 20, spacing);
-        binaryTree.left.left.left.changeColorRecursively('red');
-        binaryTree.show();
+    p.draw = function () {
+        p.background(255, 228, 196);
+        binary.show();
     }
 }
 

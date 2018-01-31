@@ -3,8 +3,7 @@ function VisualBinaryTree (sketch, numbers, x, y, xSpacing) {
     this._numbers = numbers;
     this.left = null;
     this.right = null;
-    this.x = x;
-    this.y = y;
+    this.pos = new Point(x, y);
 
     this.color = new Color(256, 256, 256);
 
@@ -25,11 +24,11 @@ function VisualBinaryTree (sketch, numbers, x, y, xSpacing) {
     this.show = function () {
         this.visualRoot.show();
         if (this.left != null) {
-            this.p.line(this.x, this.y + 10, this.left.x, this.left.y);
+            this.p.line(this.pos.x, this.pos.y + 10, this.left.pos.x, this.left.pos.y);
             this.left.show();
         }
         if (this.right != null) {
-            this.p.line(this.x, this.y + 10, this.right.x, this.right.y);
+            this.p.line(this.pos.x, this.pos.y + 10, this.right.pos.x, this.right.pos.y);
             this.right.show();
         }
     }
@@ -46,6 +45,48 @@ function VisualBinaryTree (sketch, numbers, x, y, xSpacing) {
     
         if (this.right != null) {
             this.right.changeColorRecursively(color);
+        }
+    }
+}
+
+function VisualBinarySearch(sketch, numbers, x, y) {
+    this.p = sketch;
+    let spacing = (numbers.length * 15) / 2;
+    this.tree = new VisualBinaryTree(sketch, numbers, x, y, spacing);
+    this.searchHead = new SearchHead(sketch, x, y);
+    this.currentNode = null;
+    this.numSteps = 1;
+
+    this.startSearchFor = function (num) {
+        this.currentNode = this.tree;
+        this.searchHead.setTarget(num);
+        this.tree.changeColor('yellow');
+    }
+
+    this.show = function () {
+        this.tree.show();
+        this.searchHead.update();
+        this.searchHead.show();
+    }
+
+    this.step = function () {
+        if (this.currentNode.root == this.searchHead.searchTarget) {
+            this.currentNode.changeColor('green');
+            return;
+        } else if (this.currentNode.root > this.searchHead.searchTarget) {
+            this.currentNode.changeColor('red'); 
+            this.currentNode.right.changeColorRecursively('red');
+            this.currentNode = this.currentNode.left;
+            this.searchHead.moveTo(this.currentNode.pos);
+            this.currentNode.changeColor('yellow');
+            this.numSteps++;
+        } else if (this.currentNode.root < this.searchHead.searchTarget) {
+            this.currentNode.changeColor('red'); 
+            this.currentNode.left.changeColorRecursively('red');
+            this.currentNode = this.currentNode.right;
+            this.searchHead.moveTo(this.currentNode.pos);
+            this.currentNode.changeColor('yellow');
+            this.numSteps++;
         }
     }
 }

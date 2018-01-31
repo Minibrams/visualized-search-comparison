@@ -116,7 +116,6 @@ function VisualLinearSearch(sketch, numbers, x = 50, y = 50) {
             this.searchHead.moveTo(next);
             this.numSteps++;
         }
-        
     }
 }
 
@@ -154,12 +153,20 @@ function SearchHead (sketch, x, y) {
 
     this.update = function() {
         if (this.moving) {
-            let movement = ( this.nextPos.x - this.targetPos.x ) * this.speedRate;
-            this.targetPos.x += movement;
-            this.endPos.x += movement;
-            if ( (this.nextPos.x - this.targetPos.x) < 1 ) {
+            let Xmovement = ( this.nextPos.x - this.targetPos.x ) * this.speedRate;
+            let Ymovement = ( this.nextPos.y - this.targetPos.y - (SEARCH_HEAD_LENGTH - 10) ) * this.speedRate;
+            
+            this.targetPos.x += Xmovement;
+            this.endPos.x += Xmovement;
+            this.targetPos.y += Ymovement;
+            this.endPos.y += Ymovement;
+
+            if ( (this.nextPos.x - this.targetPos.x) < 1 &&
+                  this.nextPos.x - this.targetPos.x > 0 ) {
                 this.targetPos.x = this.nextPos.x;
                 this.endPos.x = this.nextPos.x;
+                this.targetPos.y = this.nextPos.y - 15;
+                this.endPos.y = this.nextPos.y - SEARCH_HEAD_LENGTH;
                 this.moving = false;
             }
         }
