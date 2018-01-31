@@ -2,7 +2,7 @@
 
 // The class 'containing' the binary tree. 
 // Constructs and manipulates it recursively, so watch out for large tree sizes
-// (large trees won't fit on the tree, so I doubt I should be worried)
+// (large trees won't fit on the screen though, so I doubt I should be worried)
 function VisualBinaryTree (sketch, numbers, x, y, xSpacing) {
     //Essential information
     this.p = sketch;
