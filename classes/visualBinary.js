@@ -39,13 +39,17 @@ function VisualBinaryTree (sketch, numbers, x, y, xSpacing) {
 
     this.changeColorRecursively = function (color) {
         this.changeColor(color);
+        // Count how many nodes are colored
+        let num = 1; 
         if (this.left != null) {
-            this.left.changeColorRecursively(color);
+            num += this.left.changeColorRecursively(color);
         }
     
         if (this.right != null) {
-            this.right.changeColorRecursively(color);
+            num += this.right.changeColorRecursively(color);
         }
+
+        return num;
     }
 }
 
@@ -56,6 +60,7 @@ function VisualBinarySearch(sketch, numbers, x, y) {
     this.searchHead = new SearchHead(sketch, x, y);
     this.currentNode = null;
     this.numSteps = 1;
+    this.numExcludedNodes = 0;
 
     this.startSearchFor = function (num) {
         this.currentNode = this.tree;
@@ -75,14 +80,16 @@ function VisualBinarySearch(sketch, numbers, x, y) {
             return;
         } else if (this.currentNode.root > this.searchHead.searchTarget) {
             this.currentNode.changeColor('red'); 
-            this.currentNode.right.changeColorRecursively('red');
+            this.numExcludedNodes++;
+            this.numExcludedNodes += this.currentNode.right.changeColorRecursively('red');
             this.currentNode = this.currentNode.left;
             this.searchHead.moveTo(this.currentNode.pos);
             this.currentNode.changeColor('yellow');
             this.numSteps++;
         } else if (this.currentNode.root < this.searchHead.searchTarget) {
             this.currentNode.changeColor('red'); 
-            this.currentNode.left.changeColorRecursively('red');
+            this.numExcludedNodes++;
+            this.numExcludedNodes += this.currentNode.left.changeColorRecursively('red');
             this.currentNode = this.currentNode.right;
             this.searchHead.moveTo(this.currentNode.pos);
             this.currentNode.changeColor('yellow');

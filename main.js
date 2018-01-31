@@ -3,6 +3,11 @@ const FONT_SIZE = 10;
 const SEARCH_HEAD_LENGTH = 25;
 const SEARCH_HEAD_WIDTH = 10;
 
+// Generate data
+let numNumbers = 30;
+var numArray = generateData(numNumbers);
+var target = chooseTarget(numArray);
+
 let linearSearch = function (p) {
     // So both setup and draw can access it:
     let search = null;
@@ -18,22 +23,20 @@ let linearSearch = function (p) {
         p.createCanvas(this.width, this.height);
 
          // Generate array of numbers
-        let numArray = [];
-        for (let i = 0; i < 30; i++) {
-            numArray.push(p.floor(p.random(0, 100)));
-        }
+        
 
         // Establish visualization for linear search
         search = new VisualLinearSearch(p, numArray);
-        let target = numArray[p.floor(p.random(0, numArray.length))];
         search.startSearchFor(target);
         
         // Bind step function to button clicks
         let button = document.getElementById('stepLinear');
         let stepCountField = document.getElementById('stepCountLinear');
+        let numExcludedNodesField = document.getElementById('exclusionCounterLinear');
         button.onclick = function () {
             search.step();
             stepCountField.innerHTML = "Number of steps: " + search.numSteps;
+            numExcludedNodesField.innerHTML = 'Number of excluded nodes: ' + search.numExcludedNodes;
         }
     }
 
@@ -57,21 +60,19 @@ let binarySearch = function (p) {
         p.textSize(FONT_SIZE);
         p.createCanvas(this.width, this.height);
 
-        let numArray = [];
-        for (let i = 0; i < 30; i++) {
-            numArray.push(p.floor(p.random(0, 100)));
-        }
+        let sorted = numArray.sort(function(a,b){return a - b});
+        binary = new VisualBinarySearch(p, sorted, this.width * 0.5, 50);
+        binary.startSearchFor(target);
 
-        numArray.sort();
-        binary = new VisualBinarySearch(p, numArray, this.width * 0.5, 50);
         // Bind button to step function
         let button = document.getElementById('stepBinary');
         let numStepsField = document.getElementById('stepCountBinary');
+        let numExcludedNodesField = document.getElementById('exclusionCounterBinary');
         button.onclick = function () {
             binary.step();
             numStepsField.innerHTML = 'Number of steps: ' + binary.numSteps;
+            numExcludedNodesField.innerHTML = 'Number of excluded nodes: ' + binary.numExcludedNodes; 
         }
-        binary.startSearchFor(60);
     }
 
     p.draw = function () {
@@ -83,3 +84,23 @@ let binarySearch = function (p) {
 // This step is crucial for the p5 sketch to be displayed.
 let l = new p5(linearSearch, 'linearCanvas');
 let b = new p5(binarySearch, 'binaryCanvas');
+
+
+
+
+
+
+//UTILITY
+function generateData(numData) {
+    let arr = []
+    while(arr.length < numData){
+        let randomnumber = Math.floor(Math.random()*100);
+        if(arr.indexOf(randomnumber) > -1) continue;
+        arr[arr.length] = randomnumber;
+    }
+    return arr;
+}
+
+function chooseTarget(arr) {
+    return arr[Math.floor(Math.random()*arr.length)];
+}
