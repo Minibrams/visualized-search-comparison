@@ -81,7 +81,11 @@ function VisualBinarySearch(sketch, numbers, x, y) {
         } else if (this.currentNode.root > this.searchHead.searchTarget) {
             this.currentNode.changeColor('red'); 
             this.numExcludedNodes++;
-            this.numExcludedNodes += this.currentNode.right.changeColorRecursively('red');
+
+            if (this.currentNode.right != null) {
+                this.numExcludedNodes += this.currentNode.right.changeColorRecursively('red');
+            }
+
             this.currentNode = this.currentNode.left;
             this.searchHead.moveTo(this.currentNode.pos);
             this.currentNode.changeColor('yellow');
@@ -89,7 +93,10 @@ function VisualBinarySearch(sketch, numbers, x, y) {
         } else if (this.currentNode.root < this.searchHead.searchTarget) {
             this.currentNode.changeColor('red'); 
             this.numExcludedNodes++;
-            this.numExcludedNodes += this.currentNode.left.changeColorRecursively('red');
+            
+            if (this.currentNode.left != null) {
+                this.numExcludedNodes += this.currentNode.left.changeColorRecursively('red');
+            }
             this.currentNode = this.currentNode.right;
             this.searchHead.moveTo(this.currentNode.pos);
             this.currentNode.changeColor('yellow');
