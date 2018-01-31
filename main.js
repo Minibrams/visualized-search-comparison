@@ -137,7 +137,15 @@ function reset() {
     // Remove the sketches
     l.remove();
     b.remove();
+
+    // Read the number of numbers to generate: 
+    let num = document.getElementById('numRandomNumbersField').value;
+    let isValid = /^[0-9]*$/.test(num);
+    if (!isValid) {
+        // TODO: Show some error message here.
+    }
     
+    numNumbers = parseInt(num);
     // Regenerate data
     numArray = generateData(numNumbers);
     target = chooseTarget(numArray);

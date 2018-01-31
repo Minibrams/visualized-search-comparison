@@ -53,3 +53,7 @@ textarea {
 body {
     background-color: burlywood;
 }
+
+#numRandomNumbersField {
+    width: 40px;
+}
