@@ -56,8 +56,8 @@ function VisualLinearSearch(sketch, numbers, x = 50, y = 50) {
 
     // Get a search head, initialize it at the position of the first number.
     this.searchHead = new SearchHead(sketch, 
-                                this.arr.getPositionOfIndex(0).x, 
-                                this.arr.getPositionOfIndex(0).y);
+                                this.arr.getPositionAtIndex(0).x, 
+                                this.arr.getPositionAtIndex(0).y);
 
     // Visualize the array and the search head. Update search head's position
     this.show = function () {
@@ -85,7 +85,7 @@ function VisualLinearSearch(sketch, numbers, x = 50, y = 50) {
             this.arr.changeColorOfIndex(this.currentIndex, 'red');
             this.currentIndex++;
             this.arr.changeColorOfIndex(this.currentIndex, 'yellow');
-            let next = this.arr.getPositionOfIndex(this.currentIndex);
+            let next = this.arr.getPositionAtIndex(this.currentIndex);
             this.searchHead.moveTo(next);
             this.numSteps++;
             this.numExcludedNodes++;
