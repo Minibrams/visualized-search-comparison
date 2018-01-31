@@ -11,7 +11,13 @@
 <body>
     <section class = "container">
         <h1>Search Visualizer!</h1>
-        <button class="btn btn-info" id="reset">Reset with random data</button>
+        <h6>Enter your own data or generate some random data with the buttons below.</h6>
+        <p>When entering data, separate values by a comma. </p>
+        <p style = "font-style: italic">For visual reasons, choose integers between 0 and 100 so it fits inside the bubbles <3</p>
+        <textarea id = "userInput"></textarea>
+        <p visibility="hidden" id = "inputErrorMessageField"></p>
+        <button class="btn btn-info" style="margin-bottom: 20px;" id="resetWithInput">Reset with my data</button>
+        <button class="btn btn-info" style="margin-bottom: 20px;" id="reset">Reset with random data</button>
     </section>
 
     <div>

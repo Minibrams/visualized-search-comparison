@@ -17,6 +17,10 @@ document.getElementById('reset').onclick = function () {
     reset();
 }
 
+document.getElementById('resetWithInput').onclick = function () {
+    resetWithInput();
+}
+
 // Builds the entire sketch object for the linear search visualization. 
 // Returns a sketch object used for creating new p5 objects.
 function buildLinearSearchSketch () {
@@ -127,6 +131,40 @@ function reset() {
 function init() {
     numArray = generateData(numNumbers);
     target = chooseTarget(numArray);
+    l = new p5(buildLinearSearchSketch(), 'linearCanvas');
+    b = new p5(buildBinarySearchSketch(), 'binaryCanvas');
+}
+
+function resetWithInput() {
+    l.remove();
+    b.remove();
+
+    // Get the user input
+    let input = document.getElementById('userInput').value;
+    let errorField = document.getElementById('inputErrorMessageField');
+    errorField.style.visibility = 'hidden';
+
+    // Clean the input, alert user if they messed up
+    let isValid = /^[0-9,\s]*$/.test(input);
+    if (!isValid) {
+        errorField.innerHTML = "Please enter only integers separated by commas.</br> Example input:</br> 4, 8, 15, 16, 23, 42";
+        errorField.style.visibility = 'visible';
+        console.log('getting the fuck out');
+        return;
+    }
+
+    // Remove whitespace
+    input = input.replace(/\s/g, '');
+    let numbersAsStrings = input.split(',');
+    
+    let numbers = [];
+    numbersAsStrings.forEach(number => {
+        numbers.push(parseInt(number));
+    });
+
+    numArray = numbers;
+    target = chooseTarget(numArray);
+
     l = new p5(buildLinearSearchSketch(), 'linearCanvas');
     b = new p5(buildBinarySearchSketch(), 'binaryCanvas');
 }
