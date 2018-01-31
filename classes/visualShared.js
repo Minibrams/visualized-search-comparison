@@ -1,3 +1,5 @@
+// Contains all classes shared and used by both linear and binary search
+// Examples include the visualization for numbers and the search head visualization. 
 
 // The class for visualizing single numbers
 function VisualNumber (sketch, val, x, y) {
@@ -34,97 +36,14 @@ function VisualNumber (sketch, val, x, y) {
     }
 }
 
-// The class for visualizing an array of numbers
-function VisualArray(sketch, x, y) {
-    // Essential info
-    this.p = sketch;
-    this.numbers = [];
-    this.y = y;
-    this.x = x;
-
-    //Formatting info
-    this.numOffset = 30;
-    // Methods
-    this.add = function(num) {
-        let xOffset = this.numbers.length * this.numOffset;
-        let newNum = new VisualNumber(this.p, num, x + xOffset, y);
-        this.numbers.push(newNum);
-    }
-
-    this.show = function () {
-        this.numbers.forEach ( element => {
-            element.show();
-        });
-    }
-
-    this.getNumberAtIndex = function (index) {
-        return this.numbers[index].val;
-    }
-
-    this.getPositionOfIndex = function (index) {
-        if (index > this.numbers.length)
-            return null;
-        
-        return new Point(this.numbers[index].x, this.numbers[index].y);
-    }
-
-    this.changeColorOfIndex = function (index, color) {
-        let num = this.numbers[index];
-        num.changeColor(color);
-    }
-}
-
-// The class for visualizing a linear search through an array
-function VisualLinearSearch(sketch, numbers, x = 50, y = 50) {
-    this.p = sketch;
-    this.currentIndex = 0;
-    this.numSteps = 1;
-    this.numExcludedNodes = 0;
-    
-    this.arr = new VisualArray(sketch, x, y);
-    numbers.forEach(num => {
-        this.arr.add(num);
-    });
-
-    this.searchHead = new SearchHead(sketch, 
-                                this.arr.getPositionOfIndex(0).x, 
-                                this.arr.getPositionOfIndex(0).y);
-
-    this.show = function () {
-        this.arr.show();
-        this.searchHead.show();
-        this.searchHead.update();
-    }
-
-    this.startSearchFor = function (num) {
-        this.searchHead.setTarget(num);
-        this.arr.changeColorOfIndex(this.currentIndex, 'yellow');
-    }
-
-    this.step = function () {
-        
-        if (this.arr.getNumberAtIndex(this.currentIndex) == this.searchHead.searchTarget) {
-            this.arr.changeColorOfIndex(this.currentIndex, 'green');
-            return;
-        } else if (this.currentIndex == this.arr.numbers.length-1) {
-            this.arr.changeColorOfIndex(this.currentIndex, 'red');
-            return;
-        } else {
-            this.arr.changeColorOfIndex(this.currentIndex, 'red');
-            this.currentIndex++;
-            this.arr.changeColorOfIndex(this.currentIndex, 'yellow');
-            let next = this.arr.getPositionOfIndex(this.currentIndex);
-            this.searchHead.moveTo(next);
-            this.numSteps++;
-            this.numExcludedNodes++;
-        }
-    }
-}
-
 // The class for visualizing the searching head
 function SearchHead (sketch, x, y) {
     // Essential info
     this.p = sketch;
+    
+    // targetPos is the linepoint just above the target node.
+    // endPos is the linepoint a little higher. 
+    // They are only used for drawing the search head. 
     this.targetPos = new Point(x, y - 15);
     this.endPos = new Point(x, y - SEARCH_HEAD_LENGTH);
     this.searchTarget = null;
@@ -153,6 +72,9 @@ function SearchHead (sketch, x, y) {
         }
     }
 
+    // If 'moving' is true, we should still be moving towards the target number.
+    // Calculate the distance between the head and the target, and multiply it by some speedrate.
+    // This makes the search head move more fluidly.
     this.update = function() {
         if (this.moving) {
             let Xmovement = ( this.nextPos.x - this.targetPos.x ) * this.speedRate;
@@ -174,11 +96,14 @@ function SearchHead (sketch, x, y) {
         }
     }
 
+    // Call this when a search is initiated. 
     this.setTarget = function (num) {
         this.searchTarget = num;
         this.textXOffset = num >= 10 ? FONT_SIZE * 0.7 : FONT_SIZE * 0.3;
     }
 
+    // Sets a target for the position update in this.update(), and sets the 
+    // state variable to true.
     this.moveTo = function (pos) {
         this.moving = true;
         this.nextPos = pos;

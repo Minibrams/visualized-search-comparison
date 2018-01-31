@@ -1,4 +1,9 @@
-// Constants
+// Look, I know this entire file is horrible to look at and side-effects galore, 
+// but I swear to the old gods and the new that if I have to spend one more minute
+// trying to make JavaScript both readable and functionally sound, I'm going to fucking
+// scream.
+
+// Global constants
 const FONT_SIZE = 10;
 const SEARCH_HEAD_LENGTH = 25;
 const SEARCH_HEAD_WIDTH = 10;
@@ -8,7 +13,7 @@ let numNumbers = 30;
 var numArray = generateData(numNumbers);
 var target = chooseTarget(numArray);
 
-// Sets it all off immediately
+// Visualize everything immediately - don't wait for a button press here.
 let l, b;
 init();
 
@@ -17,6 +22,7 @@ document.getElementById('reset').onclick = function () {
     reset();
 }
 
+// Also with user input
 document.getElementById('resetWithInput').onclick = function () {
     resetWithInput();
 }
@@ -28,6 +34,7 @@ function buildLinearSearchSketch () {
         // So both setup and draw can access it:
         let search = null;
     
+        // Is run once when the p5.js sketch is started
         p.setup = function() {
             // Save height and width for later positioning
             let cnv = document.getElementById('linearCanvas');
@@ -53,6 +60,7 @@ function buildLinearSearchSketch () {
             }
         }
     
+        // Is run once every frame
         p.draw = function () {
             p.background(250, 235, 215);
             search.show();
@@ -66,8 +74,10 @@ function buildLinearSearchSketch () {
 // Returns a sketch object used for creating new p5 objects.
 function buildBinarySearchSketch () {
     let binarySearch = function (p) {
+        // So both setup and draw can access it
         let binary = null;
     
+        // Run once when the sketch is started
         p.setup = function () {
             // Save height and width for later positioning
             let cnv = document.getElementById('binaryCanvas');
@@ -78,6 +88,8 @@ function buildBinarySearchSketch () {
             p.textSize(FONT_SIZE);
             p.createCanvas(this.width, this.height);
     
+            // Can you believe that I had to tell it what comparing function
+            // it should use to sort an array of numbers. 
             let sorted = numArray.sort(function(a,b){return a - b});
             binary = new VisualBinarySearch(p, sorted, this.width * 0.5, 50);
             binary.startSearchFor(target);
@@ -92,7 +104,8 @@ function buildBinarySearchSketch () {
                 numExcludedNodesField.innerHTML = 'Number of excluded nodes: ' + binary.numExcludedNodes; 
             }
         }
-    
+
+        // Run once every frame
         p.draw = function () {
             p.background(255, 228, 196);
             binary.show();
@@ -119,15 +132,22 @@ function chooseTarget(arr) {
     return arr[Math.floor(Math.random()*arr.length)];
 }
 
+// Hard reset with random data
 function reset() {
+    // Remove the sketches
     l.remove();
     b.remove();
+    
+    // Regenerate data
     numArray = generateData(numNumbers);
     target = chooseTarget(numArray);
+
+    // Regenerate the sketches
     l = new p5(buildLinearSearchSketch(), 'linearCanvas');
     b = new p5(buildBinarySearchSketch(), 'binaryCanvas');
 }
 
+// Sets it all up when the site loads
 function init() {
     numArray = generateData(numNumbers);
     target = chooseTarget(numArray);
@@ -135,7 +155,9 @@ function init() {
     b = new p5(buildBinarySearchSketch(), 'binaryCanvas');
 }
 
+// Reset but with user input instead of random data. 
 function resetWithInput() {
+    // Remove the sketches
     l.remove();
     b.remove();
 
@@ -157,14 +179,17 @@ function resetWithInput() {
     input = input.replace(/\s/g, '');
     let numbersAsStrings = input.split(',');
     
+    // Parse into actual integers
     let numbers = [];
     numbersAsStrings.forEach(number => {
         numbers.push(parseInt(number));
     });
 
+    // yay side-effects
     numArray = numbers;
     target = chooseTarget(numArray);
 
+    // Regenerate the sketches
     l = new p5(buildLinearSearchSketch(), 'linearCanvas');
     b = new p5(buildBinarySearchSketch(), 'binaryCanvas');
 }
