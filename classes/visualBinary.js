@@ -15,8 +15,8 @@ function VisualBinaryTree (sketch, numbers, x, y, xSpacing) {
         let leftNumbers = this._numbers.slice(0, rootIndex);
         let rightNumbers = this._numbers.slice(rootIndex + 1, this._numbers.length);
         this.root = this._numbers[rootIndex];
-        this.left = leftNumbers.length != 0 ? new VisualBinaryTree(sketch, leftNumbers, x - xSpacing, y + 40, xSpacing * 0.45) : null;
-        this.right = rightNumbers.length != 0 ? new VisualBinaryTree(sketch, rightNumbers, x + xSpacing, y + 40, xSpacing * 0.45) : null;
+        this.left = leftNumbers.length != 0 ? new VisualBinaryTree(sketch, leftNumbers, x - xSpacing, y + 50, xSpacing * 0.45) : null;
+        this.right = rightNumbers.length != 0 ? new VisualBinaryTree(sketch, rightNumbers, x + xSpacing, y + 50, xSpacing * 0.45) : null;
     }
 
     this.visualRoot = new VisualNumber(sketch, this.root, x, y);
@@ -93,7 +93,7 @@ function VisualBinarySearch(sketch, numbers, x, y) {
         } else if (this.currentNode.root < this.searchHead.searchTarget) {
             this.currentNode.changeColor('red'); 
             this.numExcludedNodes++;
-            
+
             if (this.currentNode.left != null) {
                 this.numExcludedNodes += this.currentNode.left.changeColorRecursively('red');
             }
