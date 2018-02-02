@@ -90,7 +90,7 @@ function VisualBinarySearch(sketch, numbers, x, y) {
 
     // Information for the UI
     this.currentNode = null;
-    this.numSteps = 1;
+    this.numSteps = 0;
     this.numExcludedNodes = 0;
 
     // Initiates a search.

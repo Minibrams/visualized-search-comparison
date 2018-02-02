@@ -20,11 +20,13 @@ init();
 // Bind the reset button
 document.getElementById('reset').onclick = function () {
     reset();
+    resetSearchInfo();
 }
 
 // Also with user input
 document.getElementById('resetWithInput').onclick = function () {
     resetWithInput();
+    resetSearchInfo();
 }
 
 // Builds the entire sketch object for the linear search visualization. 
@@ -200,4 +202,12 @@ function resetWithInput() {
     // Regenerate the sketches
     l = new p5(buildLinearSearchSketch(), 'linearCanvas');
     b = new p5(buildBinarySearchSketch(), 'binaryCanvas');
+}
+
+/* Reset number of excluded nodes and number of steps to 0 for all visualizations */
+function resetSearchInfo() {
+    document.getElementById('stepCountBinary').innerHTML = 0;
+    document.getElementById('exclusionCounterBinary').innerHTML = 0;
+    document.getElementById('stepCountBinary').innerHTML = 0;
+    document.getElementById('exclusionCounterBinary').innerHTML = 0;
 }
