@@ -206,8 +206,8 @@ function resetWithInput() {
 
 /* Reset number of excluded nodes and number of steps to 0 for all visualizations */
 function resetSearchInfo() {
-    document.getElementById('stepCountBinary').innerHTML = 0;
-    document.getElementById('exclusionCounterBinary').innerHTML = 0;
-    document.getElementById('stepCountBinary').innerHTML = 0;
-    document.getElementById('exclusionCounterBinary').innerHTML = 0;
+    document.getElementById('stepCountBinary').innerHTML = "Number of steps: 0";
+    document.getElementById('exclusionCounterBinary').innerHTML = "Number of exluded nodes: 0";
+    document.getElementById('stepCountBinary').innerHTML = "Number of steps: 0";
+    document.getElementById('exclusionCounterBinary').innerHTML = "Number of excluded nodes: 0";
 }
