@@ -1,12 +1,4 @@
-h1 {
-    text-align: center;
-}
-
-h6 {
-    text-align: center;
-}
-
-p {
+h1, h6, p {
     text-align: center;
 }
 
@@ -21,7 +13,7 @@ p {
     margin-top: 20px;
 }
 
-textarea {
+#userInput, #numRandomNumbersField {
     display: block;
     margin: 20px auto;
     width: 50%;
@@ -55,5 +47,5 @@ body {
 }
 
 #numRandomNumbersField {
-    width: 40px;
+    width: 65px;
 }
