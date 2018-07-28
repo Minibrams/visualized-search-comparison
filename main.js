@@ -1,7 +1,6 @@
-// Look, I know this entire file is horrible to look at and side-effects galore, 
-// but I swear to the old gods and the new that if I have to spend one more minute
-// trying to make JavaScript both readable and functionally sound, I'm going to fucking
-// scream.
+// There are a lot of side effects here, but I swear to the old gods and the new that 
+// if I have to spend one more minute trying to make JavaScript both readable and 
+// functionally sound, I'm going to fucking scream.
 
 // Global constants
 const FONT_SIZE = 10;
@@ -91,7 +90,7 @@ function buildBinarySearchSketch () {
             p.createCanvas(this.width, this.height);
     
             // Can you believe that I had to tell it what comparing function
-            // it should use to sort an array of numbers. 
+            // it should use to sort an array of numbers. Fuck javascript.
             let sorted = numArray.sort(function(a,b){return a - b});
             binary = new VisualBinarySearch(p, sorted, this.width * 0.5, 50);
             binary.startSearchFor(target);

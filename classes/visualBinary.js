@@ -3,6 +3,8 @@
 // The class 'containing' the binary tree. 
 // Constructs and manipulates it recursively, so watch out for large tree sizes
 // (large trees won't fit on the screen though, so I doubt I should be worried)
+
+
 function VisualBinaryTree (sketch, numbers, x, y, xSpacing) {
     //Essential information
     this.p = sketch;
@@ -10,6 +12,7 @@ function VisualBinaryTree (sketch, numbers, x, y, xSpacing) {
     this.left = null;
     this.right = null;
     this.pos = new Point(x, y);
+    this._y = y;
     this.color = new Color(256, 256, 256);
 
     // Immediately build the tree to visualize it
@@ -26,7 +29,7 @@ function VisualBinaryTree (sketch, numbers, x, y, xSpacing) {
 
         // Don't try to make a subtree if there are no numbers for it
         this.root = this._numbers[rootIndex];
-        this.left = leftNumbers.length != 0 ? new VisualBinaryTree(sketch, leftNumbers, x - xSpacing, y + 50, xSpacing * 0.45) : null;
+        this.left = leftNumbers.length != 0 ?   new VisualBinaryTree(sketch, leftNumbers,  x - xSpacing, y + 50, xSpacing * 0.45) : null;
         this.right = rightNumbers.length != 0 ? new VisualBinaryTree(sketch, rightNumbers, x + xSpacing, y + 50, xSpacing * 0.45) : null;
     }
 
@@ -38,12 +41,13 @@ function VisualBinaryTree (sketch, numbers, x, y, xSpacing) {
     // and right subtree, given that they exist
     this.show = function () {
         this.visualRoot.show();
+        this.pos.y = this._y * (document.getElementById('ySpacing').value * 0.01) + 50;
         if (this.left != null) {
-            this.p.line(this.pos.x, this.pos.y + 10, this.left.pos.x, this.left.pos.y);
+            this.p.line(this.pos.x, this.pos.y + 10, this.left.pos.x, this.left.pos.y + 10);
             this.left.show();
         }
         if (this.right != null) {
-            this.p.line(this.pos.x, this.pos.y + 10, this.right.pos.x, this.right.pos.y);
+            this.p.line(this.pos.x, this.pos.y + 10, this.right.pos.x, this.left.pos.y + 10);
             this.right.show();
         }
     }
@@ -81,12 +85,11 @@ function VisualBinarySearch(sketch, numbers, x, y) {
 
     // Spacing between the two first children in the tree
     let spacing = (numbers.length * 15) / 2; 
-
     // Build the tree
     this.tree = new VisualBinaryTree(sketch, numbers, x, y, spacing);
 
     // Get a search head
-    this.searchHead = new SearchHead(sketch, x, y);
+    this.searchHead = new SearchHead(sketch, this.tree.pos.x, this.tree.pos.y);
 
     // Information for the UI
     this.currentNode = null;
@@ -99,6 +102,9 @@ function VisualBinarySearch(sketch, numbers, x, y) {
         this.searchHead.setTarget(num);
         this.tree.changeColor('yellow');
     }
+
+    this.startSearchFor(this.tree.root);
+    this.searchHead.moveTo(this.currentNode.pos);
 
     // Visualize the tree and the search head, update the search head's position
     this.show = function () {

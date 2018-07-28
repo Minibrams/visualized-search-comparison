@@ -1,6 +1,9 @@
 // Contains all classes shared and used by both linear and binary search
 // Examples include the visualization for numbers and the search head visualization. 
 
+// Slider
+var ySpacingSlider = document.getElementById('ySpacing');
+
 // The class for visualizing single numbers
 function VisualNumber (sketch, val, x, y) {
     // Essential info
@@ -8,6 +11,8 @@ function VisualNumber (sketch, val, x, y) {
     this.val = val;
     this.x = x;
     this.y = y;
+    this._x = x; // Never change
+    this._y = y; // Never change
 
     // Formatting info
     this.textXOffset = this.val >= 10 ? FONT_SIZE * 0.7 : FONT_SIZE * 0.3;
@@ -16,6 +21,9 @@ function VisualNumber (sketch, val, x, y) {
 
     // Methods
     this.show = function () {
+        // Scale ySpacing
+        this.y = this._y * (ySpacingSlider.value * 0.01) + 50;
+
         //Draw background
         this.p.fill(this.color.r, this.color.g, this.color.b);
         this.p.ellipse(this.x, this.y, 20, 20);
