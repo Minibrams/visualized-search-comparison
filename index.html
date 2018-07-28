@@ -9,40 +9,43 @@
     <title>Sorting algorithms visualized</title>
 </head>
 <body>
-    <section class = "container">
+    <section class="container-fluid pt-4">
         <h1>Search Visualizer!</h1>
         <h6>Enter your own data or generate some random data with the buttons below.</h6>
-        <p>When entering data, separate values by a comma. </p>
-        <p style = "font-style: italic">For visual reasons, choose integers between 0 and 100 so they fit inside the bubbles <3</p>
-        <textarea id = "userInput"></textarea>
-        <p visibility="hidden" id = "inputErrorMessageField"></p>
+        <p>When entering data, separate values by a comma.</p>
+        <p style="font-style: italic">For visual reasons, choose integers between 0 and 100 so they fit inside the bubbles</p>
+        <input class="form-control" type="text" id="userInput" />
+        <p visibility="hidden" id="inputErrorMessageField"></p>
+
         <button class="btn btn-info" style="margin-bottom: 20px;" id="resetWithInput">Reset with my data</button>
         <p>Enter the number of random numbers to be generated.</p>
-        <textarea id = "numRandomNumbersField">30</textarea>
+
+        <input class="form-control col-4" type="number" id="numRandomNumbersField" value="30" />
         <button class="btn btn-info" style="margin-bottom: 20px;" id="reset">Reset with random numbers</button>
     </section>
 
-    <div>
-        <div class = "row">
-          <div class="col-lg-6 col-sm-12 left" id = "linearCanvas">
+    <section class="container-fluid">
+        <div class="row">
+          <div class="col-lg-6 col-sm-12 left" id="linearCanvas">
             <h1>Linear Search</h1>
             <button class="btn btn-info" id="stepLinear">Step</button>
-            <div class = "infoField">
-                <h6 id = "stepCountLinear">Number of steps: 0</h6>
-                <h6 id = "exclusionCounterLinear">Number of excluded nodes: 0</h6>
+            <div class="infoField">
+                <h6 id="stepCountLinear">Number of steps: 0</h6>
+                <h6 id="exclusionCounterLinear">Number of excluded nodes: 0</h6>
             </div>
           </div>
-          <div class="col-lg-6 col-sm-12 right" id = "binaryCanvas">
+          <div class="col-lg-6 col-sm-12 right" id="binaryCanvas">
             <h1>Binary Search</h1>
             <button class="btn btn-info" id="stepBinary">Step</button>
-            <div class = "infoField">
+            <div class="infoField">
                 <input type="range" min="0" max="100" value="50" class="slider" id="ySpacing"/>
-                <h6 id = "stepCountBinary">Number of steps: 0</h6>
-                <h6 id = "exclusionCounterBinary">Number of excluded nodes: 0</h6>
+                <h6 id="stepCountBinary">Number of steps: 0</h6>
+                <h6 id="exclusionCounterBinary">Number of excluded nodes: 0</h6>
             </div>
           </div>
         </div>
-      </div>
+    </section>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js"></script>

@@ -1,5 +1,5 @@
 // Contains all classes shared and used by both linear and binary search
-// Examples include the visualization for numbers and the search head visualization. 
+// Examples include the visualization for numbers and the search head visualization.
 
 // Slider
 var ySpacingSlider = document.getElementById('ySpacing');
@@ -27,10 +27,10 @@ function VisualNumber (sketch, val, x, y) {
         //Draw background
         this.p.fill(this.color.r, this.color.g, this.color.b);
         this.p.ellipse(this.x, this.y, 20, 20);
-        
+
         //Draw text
         this.p.fill(0);
-        this.p.text(this.val, this.x - this.textXOffset, this.y + this.textYOffset);    
+        this.p.text(this.val, this.x - this.textXOffset, this.y + this.textYOffset);
     }
 
     this.changeColor = function (color) {
@@ -48,10 +48,10 @@ function VisualNumber (sketch, val, x, y) {
 function SearchHead (sketch, x, y) {
     // Essential info
     this.p = sketch;
-    
+
     // targetPos is the linepoint just above the target node.
-    // endPos is the linepoint a little higher. 
-    // They are only used for drawing the search head. 
+    // endPos is the linepoint a little higher.
+    // They are only used for drawing the search head.
     this.targetPos = new Point(x, y - 15);
     this.endPos = new Point(x, y - SEARCH_HEAD_LENGTH);
     this.searchTarget = null;
@@ -71,7 +71,7 @@ function SearchHead (sketch, x, y) {
         this.p.line(this.targetPos.x, this.targetPos.y, this.endPos.x, this.endPos.y);
 
         // Draw the upper bar
-        this.p.line(this.endPos.x - SEARCH_HEAD_WIDTH * 0.5, this.endPos.y, 
+        this.p.line(this.endPos.x - SEARCH_HEAD_WIDTH * 0.5, this.endPos.y,
                this.endPos.x + SEARCH_HEAD_WIDTH * 0.5, this.endPos.y);
 
         // If we are looking for a number, show that above the bar
@@ -87,7 +87,7 @@ function SearchHead (sketch, x, y) {
         if (this.moving) {
             let Xmovement = ( this.nextPos.x - this.targetPos.x ) * this.speedRate;
             let Ymovement = ( this.nextPos.y - this.targetPos.y - (SEARCH_HEAD_LENGTH - 10) ) * this.speedRate;
-            
+
             this.targetPos.x += Xmovement;
             this.endPos.x += Xmovement;
             this.targetPos.y += Ymovement;
@@ -104,13 +104,13 @@ function SearchHead (sketch, x, y) {
         }
     }
 
-    // Call this when a search is initiated. 
+    // Call this when a search is initiated.
     this.setTarget = function (num) {
         this.searchTarget = num;
         this.textXOffset = num >= 10 ? FONT_SIZE * 0.7 : FONT_SIZE * 0.3;
     }
 
-    // Sets a target for the position update in this.update(), and sets the 
+    // Sets a target for the position update in this.update(), and sets the
     // state variable to true.
     this.moveTo = function (pos) {
         this.moving = true;

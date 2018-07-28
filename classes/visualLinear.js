@@ -1,4 +1,4 @@
-// This document contains all classes that are used for linear search visualization. 
+// This document contains all classes that are used for linear search visualization.
 
 // The class for visualizing an array of numbers
 function VisualArray(sketch, x, y) {
@@ -31,7 +31,7 @@ function VisualArray(sketch, x, y) {
     this.getPositionAtIndex = function (index) {
         if (index > this.numbers.length)
             return null;
-        
+
         return new Point(this.numbers[index].x, this.numbers[index].y);
     }
 
@@ -47,7 +47,7 @@ function VisualLinearSearch(sketch, numbers, x = 50, y = 50) {
     this.currentIndex = 0;
     this.numSteps = 1;
     this.numExcludedNodes = 0;
-    
+
     // Initialize the visual array so we have something to look at
     this.arr = new VisualArray(sketch, x, y);
     numbers.forEach(num => {
@@ -55,8 +55,8 @@ function VisualLinearSearch(sketch, numbers, x = 50, y = 50) {
     });
 
     // Get a search head, initialize it at the position of the first number.
-    this.searchHead = new SearchHead(sketch, 
-                                this.arr.getPositionAtIndex(0).x, 
+    this.searchHead = new SearchHead(sketch,
+                                this.arr.getPositionAtIndex(0).x,
                                 this.arr.getPositionAtIndex(0).y);
 
     // Visualize the array and the search head. Update search head's position
@@ -66,15 +66,15 @@ function VisualLinearSearch(sketch, numbers, x = 50, y = 50) {
         this.searchHead.update();
     }
 
-    // Initialize a search 
+    // Initialize a search
     this.startSearchFor = function (num) {
         this.searchHead.setTarget(num);
         this.arr.changeColorOfIndex(this.currentIndex, 'yellow');
     }
 
-    // Step through the linear search algorithm. 
+    // Step through the linear search algorithm.
     this.step = function () {
-        
+
         if (this.arr.getNumberAtIndex(this.currentIndex) == this.searchHead.searchTarget) {
             this.arr.changeColorOfIndex(this.currentIndex, 'green');
             return;
@@ -92,4 +92,3 @@ function VisualLinearSearch(sketch, numbers, x = 50, y = 50) {
         }
     }
 }
-

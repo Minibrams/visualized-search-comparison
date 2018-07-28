@@ -1,5 +1,5 @@
-// There are a lot of side effects here, but I swear to the old gods and the new that 
-// if I have to spend one more minute trying to make JavaScript both readable and 
+// There are a lot of side effects here, but I swear to the old gods and the new that
+// if I have to spend one more minute trying to make JavaScript both readable and
 // functionally sound, I'm going to fucking scream.
 
 // Global constants
@@ -17,39 +17,57 @@ let l, b;
 init();
 
 // Bind the reset button
-document.getElementById('reset').onclick = function () {
+document.getElementById('reset').addEventListener("click", function () {
     reset();
     resetSearchInfo();
-}
+});
 
 // Also with user input
-document.getElementById('resetWithInput').onclick = function () {
+document.getElementById('resetWithInput').addEventListener("click", function () {
     resetWithInput();
     resetSearchInfo();
-}
+});
 
-// Builds the entire sketch object for the linear search visualization. 
+// Bind the reset button
+document.getElementById('numRandomNumbersField').addEventListener("keypress", function(e) {
+    if (e.keyCode == 13) {
+        console.log(e.keyCode);
+        reset();
+        resetSearchInfo();
+    }
+});
+
+// Also with user input
+document.getElementById('userInput').addEventListener("keypress", function(e) {
+    if (e.keyCode == 13) {
+        console.log(e.keyCode);
+        resetWithInput();
+        resetSearchInfo();
+    }
+});
+
+// Builds the entire sketch object for the linear search visualization.
 // Returns a sketch object used for creating new p5 objects.
 function buildLinearSearchSketch () {
     let linearSearch = function (p) {
         // So both setup and draw can access it:
         let search = null;
-    
+
         // Is run once when the p5.js sketch is started
         p.setup = function() {
             // Save height and width for later positioning
             let cnv = document.getElementById('linearCanvas');
             this.width = cnv.offsetWidth;
             this.height = cnv.offsetHeight;
-            
+
             //Configure p5
             p.textSize(FONT_SIZE);
             p.createCanvas(this.width, this.height);
-    
+
             // Establish visualization for linear search
             search = new VisualLinearSearch(p, numArray);
             search.startSearchFor(target);
-            
+
             // Bind step function to button clicks
             let button = document.getElementById('stepLinear');
             let stepCountField = document.getElementById('stepCountLinear');
@@ -60,41 +78,41 @@ function buildLinearSearchSketch () {
                 numExcludedNodesField.innerHTML = 'Number of excluded nodes: ' + search.numExcludedNodes;
             }
         }
-    
+
         // Is run once every frame
         p.draw = function () {
             p.background(250, 235, 215);
             search.show();
         }
-    } 
+    }
 
     return linearSearch;
 }
 
-// Builds the entire sketch object for the binary search visualization. 
+// Builds the entire sketch object for the binary search visualization.
 // Returns a sketch object used for creating new p5 objects.
 function buildBinarySearchSketch () {
     let binarySearch = function (p) {
         // So both setup and draw can access it
         let binary = null;
-    
+
         // Run once when the sketch is started
         p.setup = function () {
             // Save height and width for later positioning
             let cnv = document.getElementById('binaryCanvas');
             this.width = cnv.offsetWidth;
             this.height = cnv.offsetHeight;
-            
+
             //Configure p5
             p.textSize(FONT_SIZE);
             p.createCanvas(this.width, this.height);
-    
+
             // Can you believe that I had to tell it what comparing function
             // it should use to sort an array of numbers. Fuck javascript.
             let sorted = numArray.sort(function(a,b){return a - b});
             binary = new VisualBinarySearch(p, sorted, this.width * 0.5, 50);
             binary.startSearchFor(target);
-    
+
             // Bind button to step function
             let button = document.getElementById('stepBinary');
             let numStepsField = document.getElementById('stepCountBinary');
@@ -102,7 +120,7 @@ function buildBinarySearchSketch () {
             button.onclick = function () {
                 binary.step();
                 numStepsField.innerHTML = 'Number of steps: ' + binary.numSteps;
-                numExcludedNodesField.innerHTML = 'Number of excluded nodes: ' + binary.numExcludedNodes; 
+                numExcludedNodesField.innerHTML = 'Number of excluded nodes: ' + binary.numExcludedNodes;
             }
         }
 
@@ -139,13 +157,13 @@ function reset() {
     l.remove();
     b.remove();
 
-    // Read the number of numbers to generate: 
+    // Read the number of numbers to generate:
     let num = document.getElementById('numRandomNumbersField').value;
     let isValid = /^[0-9]*$/.test(num);
     if (!isValid) {
         // TODO: Show some error message here.
     }
-    
+
     numNumbers = parseInt(num);
     // Regenerate data
     numArray = generateData(numNumbers);
@@ -164,8 +182,9 @@ function init() {
     b = new p5(buildBinarySearchSketch(), 'binaryCanvas');
 }
 
-// Reset but with user input instead of random data. 
+// Reset but with user input instead of random data.
 function resetWithInput() {
+    debugger
     // Remove the sketches
     l.remove();
     b.remove();
@@ -187,7 +206,7 @@ function resetWithInput() {
     // Remove whitespace
     input = input.replace(/\s/g, '');
     let numbersAsStrings = input.split(',');
-    
+
     // Parse into actual integers
     let numbers = [];
     numbersAsStrings.forEach(number => {
