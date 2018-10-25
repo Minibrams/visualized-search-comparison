@@ -13,7 +13,8 @@ function VisualArray(sketch, x, y) {
     // Methods
     this.add = function(num) {
         let xOffset = this.numbers.length * this.numOffset;
-        let newNum = new VisualNumber(this.p, num, x + xOffset, y);
+
+        let newNum = new VisualNumber(this.p, num, x + (xOffset % 480), y + Math.floor(xOffset / 480) * 50);
         this.numbers.push(newNum);
     }
 
@@ -55,9 +56,11 @@ function VisualLinearSearch(sketch, numbers, x = 50, y = 50) {
     });
 
     // Get a search head, initialize it at the position of the first number.
-    this.searchHead = new SearchHead(sketch,
-                                this.arr.getPositionAtIndex(0).x,
-                                this.arr.getPositionAtIndex(0).y);
+    this.searchHead = new SearchHead(
+        sketch,
+        this.arr.getPositionAtIndex(0).x,
+        this.arr.getPositionAtIndex(0).y
+    );
 
     // Visualize the array and the search head. Update search head's position
     this.show = function () {
@@ -74,7 +77,6 @@ function VisualLinearSearch(sketch, numbers, x = 50, y = 50) {
 
     // Step through the linear search algorithm.
     this.step = function () {
-
         if (this.arr.getNumberAtIndex(this.currentIndex) == this.searchHead.searchTarget) {
             this.arr.changeColorOfIndex(this.currentIndex, 'green');
             return;
